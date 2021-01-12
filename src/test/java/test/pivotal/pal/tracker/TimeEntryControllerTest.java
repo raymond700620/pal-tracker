@@ -23,9 +23,13 @@ public class TimeEntryControllerTest {
 
     @BeforeEach
     public void setUp() {
+        //1. create mock
         timeEntryRepository = mock(TimeEntryRepository.class);
         controller = new TimeEntryController(timeEntryRepository);
     }
+
+ //Integrate
+//sliced testing
 
     @Test
     public void testCreate() {
@@ -35,13 +39,18 @@ public class TimeEntryControllerTest {
 
         long timeEntryId = 1L;
         TimeEntry expectedResult = new TimeEntry(timeEntryId, projectId, userId, LocalDate.parse("2017-01-08"), 8);
+        //2. prepare mock
         doReturn(expectedResult)
             .when(timeEntryRepository)
             .create(any(TimeEntry.class));
 
+        //3. invoke
         ResponseEntity<TimeEntry> response = controller.create(timeEntryToCreate);
 
+        //??? What is this one? Do I have to do this?
+        //behaviour verification
         verify(timeEntryRepository).create(timeEntryToCreate);
+        //4. checking return value
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody()).isEqualTo(expectedResult);
     }

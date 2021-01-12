@@ -3,7 +3,7 @@ applications:
 - name: pal-tracker
   path: build/libs/pal-tracker.jar
   routes:
-  - route: pal-tracker-${UNIQUE_IDENTIFIER}.${DOMAIN}
+  - route: pal-tracker-rfang.apps.evans.pal.pivotal.io
   services:
   - tracker-database
   env:
